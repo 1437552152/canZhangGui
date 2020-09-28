@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: yfye
  * @Date: 2020-06-21 23:21:29
- * @LastEditTime: 2020-09-28 23:03:31
+ * @LastEditTime: 2020-09-28 23:32:50
  * @LastEditors: yfye
 -->
 <style lang="less">
@@ -25,22 +25,19 @@
 
 <script>
 import LoginForm from '_c/login-form'
-import { mapActions } from 'vuex';
 import { postService } from '../../util/request';
 export default {
   components: {
     LoginForm
   },
   methods: {
-    ...mapActions([
-      'handleLogin',
-      'getUserInfo'
-    ]),
- handleSubmit({ userName, password }) {
+ handleSubmit({ userName, password,shopId,type }) {
       const that = this;
       let value = {};
-      value.loginName = userName;
-      value.loginPass = password;
+      value.phone = userName;
+      value.password = password;
+      value.shopId = shopId;
+      value.type = type;
 
       postService('login',value,
         (res) => {
@@ -50,9 +47,9 @@ export default {
           this.$store.commit('setUserId', res.data.uid)
           this.$store.commit('setAccess', [])
           this.$store.commit('setHasGetInfo', true);
-          this.$store.commit('setToken',res.token);
-          localStorage.setItem('setToken',res.token);
-          localStorage.setItem('userInfo',res);
+          this.$store.commit('setToken',res.authorization);
+          localStorage.setItem('setToken',res.authorization);
+          localStorage.setItem('userInfo',res.data);
            this.$router.push({
                 name: this.$config.homeName
               })

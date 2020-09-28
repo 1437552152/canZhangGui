@@ -2,10 +2,11 @@
  * @Description: 
  * @Author: yfye
  * @Date: 2020-09-26 18:47:27
- * @LastEditTime: 2020-09-28 00:10:11
+ * @LastEditTime: 2020-09-28 23:50:01
  * @LastEditors: yfye
  */
-const url="http://3h4w437127.wicp.vip/"
+/* const url="http://3h4w437127.wicp.vip:52202/"; */
+const url="http://canzg-wsl.itheima.net:8081/"
 export function postService(path, body, callback) {
   return new Promise((resolve, reject) => {
     fetch(`${url}${path}`, {
