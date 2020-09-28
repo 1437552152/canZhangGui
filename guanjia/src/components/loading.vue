@@ -1,0 +1,268 @@
+<template>
+  <div class="loading-container" v-if="loading">
+    <div class="loading">
+      <div class="la-square-jelly-box la-x">
+        <div />
+        <div />
+      </div>
+    </div>
+    <div class="item-title" v-if="txtTipShow">
+      <span>加载中...</span>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    props: {
+      loading: {
+        type: Boolean,
+        required: true
+      },
+      txtTipShow: {
+        type: Boolean,
+        default: false
+      }
+    }
+  }
+</script>
+
+<style scoped>
+  .loading-container{
+    position: absolute;
+    z-index: 2000;
+    background-color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    -webkit-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+  }
+  .loading{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -32px;
+    margin-left: -32px;
+  }
+  .item-title{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin-top: 34px;
+  }
+  .la-square-jelly-box,
+  .la-square-jelly-box > div {
+      position: relative;
+      -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+              box-sizing: border-box;
+  }
+
+  .la-square-jelly-box {
+      display: block;
+      font-size: 0;
+      color: #ccc;
+  }
+
+  .la-square-jelly-box.la-dark {
+      color: #333;
+  }
+
+  .la-square-jelly-box > div {
+      display: inline-block;
+      float: none;
+      background-color: currentColor;
+      border: 0 solid currentColor;
+  }
+
+  .la-square-jelly-box {
+      width: 32px;
+      height: 32px;
+  }
+
+  .la-square-jelly-box > div:nth-child(1),
+  .la-square-jelly-box > div:nth-child(2) {
+      position: absolute;
+      left: 0;
+      width: 100%;
+  }
+
+  .la-square-jelly-box > div:nth-child(1) {
+      top: -25%;
+      z-index: 1;
+      height: 100%;
+      border-radius: 10%;
+      -webkit-animation: square-jelly-box-animate .6s -.1s linear infinite;
+         -moz-animation: square-jelly-box-animate .6s -.1s linear infinite;
+           -o-animation: square-jelly-box-animate .6s -.1s linear infinite;
+              animation: square-jelly-box-animate .6s -.1s linear infinite;
+  }
+
+  .la-square-jelly-box > div:nth-child(2) {
+      bottom: -9%;
+      height: 10%;
+      background: #000;
+      border-radius: 50%;
+      opacity: .2;
+      -webkit-animation: square-jelly-box-shadow .6s -.1s linear infinite;
+         -moz-animation: square-jelly-box-shadow .6s -.1s linear infinite;
+           -o-animation: square-jelly-box-shadow .6s -.1s linear infinite;
+              animation: square-jelly-box-shadow .6s -.1s linear infinite;
+  }
+
+  .la-square-jelly-box.la-sm {
+      width: 16px;
+      height: 16px;
+  }
+
+  .la-square-jelly-box.la-x {
+      width: 48px;
+      height: 48px;
+  }
+
+  .la-square-jelly-box.la-2x {
+      width: 64px;
+      height: 64px;
+  }
+
+  .la-square-jelly-box.la-3x {
+      width: 96px;
+      height: 96px;
+  }
+
+  /*
+   * Animations
+   */
+  @-webkit-keyframes square-jelly-box-animate {
+      17% {
+          border-bottom-right-radius: 10%;
+      }
+      25% {
+          -webkit-transform: translateY(25%) rotate(22.5deg);
+                  transform: translateY(25%) rotate(22.5deg);
+      }
+      50% {
+          border-bottom-right-radius: 100%;
+          -webkit-transform: translateY(50%) scale(1, .9) rotate(45deg);
+                  transform: translateY(50%) scale(1, .9) rotate(45deg);
+      }
+      75% {
+          -webkit-transform: translateY(25%) rotate(67.5deg);
+                  transform: translateY(25%) rotate(67.5deg);
+      }
+      100% {
+          -webkit-transform: translateY(0) rotate(90deg);
+                  transform: translateY(0) rotate(90deg);
+      }
+  }
+  @-moz-keyframes square-jelly-box-animate {
+      17% {
+          border-bottom-right-radius: 10%;
+      }
+      25% {
+          -moz-transform: translateY(25%) rotate(22.5deg);
+               transform: translateY(25%) rotate(22.5deg);
+      }
+      50% {
+          border-bottom-right-radius: 100%;
+          -moz-transform: translateY(50%) scale(1, .9) rotate(45deg);
+               transform: translateY(50%) scale(1, .9) rotate(45deg);
+      }
+      75% {
+          -moz-transform: translateY(25%) rotate(67.5deg);
+               transform: translateY(25%) rotate(67.5deg);
+      }
+      100% {
+          -moz-transform: translateY(0) rotate(90deg);
+               transform: translateY(0) rotate(90deg);
+      }
+  }
+  @-o-keyframes square-jelly-box-animate {
+      17% {
+          border-bottom-right-radius: 10%;
+      }
+      25% {
+          -o-transform: translateY(25%) rotate(22.5deg);
+             transform: translateY(25%) rotate(22.5deg);
+      }
+      50% {
+          border-bottom-right-radius: 100%;
+          -o-transform: translateY(50%) scale(1, .9) rotate(45deg);
+             transform: translateY(50%) scale(1, .9) rotate(45deg);
+      }
+      75% {
+          -o-transform: translateY(25%) rotate(67.5deg);
+             transform: translateY(25%) rotate(67.5deg);
+      }
+      100% {
+          -o-transform: translateY(0) rotate(90deg);
+             transform: translateY(0) rotate(90deg);
+      }
+  }
+  @keyframes square-jelly-box-animate {
+      17% {
+          border-bottom-right-radius: 10%;
+      }
+      25% {
+          -webkit-transform: translateY(25%) rotate(22.5deg);
+             -moz-transform: translateY(25%) rotate(22.5deg);
+               -o-transform: translateY(25%) rotate(22.5deg);
+                  transform: translateY(25%) rotate(22.5deg);
+      }
+      50% {
+          border-bottom-right-radius: 100%;
+          -webkit-transform: translateY(50%) scale(1, .9) rotate(45deg);
+             -moz-transform: translateY(50%) scale(1, .9) rotate(45deg);
+               -o-transform: translateY(50%) scale(1, .9) rotate(45deg);
+                  transform: translateY(50%) scale(1, .9) rotate(45deg);
+      }
+      75% {
+          -webkit-transform: translateY(25%) rotate(67.5deg);
+             -moz-transform: translateY(25%) rotate(67.5deg);
+               -o-transform: translateY(25%) rotate(67.5deg);
+                  transform: translateY(25%) rotate(67.5deg);
+      }
+      100% {
+          -webkit-transform: translateY(0) rotate(90deg);
+             -moz-transform: translateY(0) rotate(90deg);
+               -o-transform: translateY(0) rotate(90deg);
+                  transform: translateY(0) rotate(90deg);
+      }
+  }
+
+  @-webkit-keyframes square-jelly-box-shadow {
+      50% {
+          -webkit-transform: scale(1.25, 1);
+                  transform: scale(1.25, 1);
+      }
+  }
+
+  @-moz-keyframes square-jelly-box-shadow {
+      50% {
+          -moz-transform: scale(1.25, 1);
+               transform: scale(1.25, 1);
+      }
+  }
+
+  @-o-keyframes square-jelly-box-shadow {
+      50% {
+          -o-transform: scale(1.25, 1);
+             transform: scale(1.25, 1);
+      }
+  }
+
+  @keyframes square-jelly-box-shadow {
+      50% {
+          -webkit-transform: scale(1.25, 1);
+             -moz-transform: scale(1.25, 1);
+               -o-transform: scale(1.25, 1);
+                  transform: scale(1.25, 1);
+      }
+  }
+
+</style>
