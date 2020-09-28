@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: yfye
  * @Date: 2020-06-21 23:21:29
- * @LastEditTime: 2020-09-28 22:21:55
+ * @LastEditTime: 2020-09-28 23:03:31
  * @LastEditors: yfye
 -->
 <style lang="less">
@@ -11,6 +11,7 @@
 
 <template>
   <div class="login">
+    <img src="../../assets/images/headBg.png" style="width:100%">
     <div class="login-con">
       <Card icon="log-in" title="欢迎登录" :bordered="false">
         <div class="form-con">

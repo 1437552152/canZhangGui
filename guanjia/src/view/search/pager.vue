@@ -177,7 +177,7 @@ export default {
                 },
                 "修改"
               ),
-                h(
+              h(
                 "Button",
                 {
                   props: {
@@ -189,7 +189,13 @@ export default {
                   },
                   on: {
                     click: () => {
-                     
+                      putService(
+                        `enterprise/resetPwd`,
+                        { id: id, pwd: "" },
+                        res => {
+                           this.$Message.success("重置成功");
+                        }
+                      );
                     }
                   }
                 },

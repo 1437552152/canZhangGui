@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: yfye
  * @Date: 2020-06-21 23:21:29
- * @LastEditTime: 2020-09-28 00:35:19
+ * @LastEditTime: 2020-09-28 23:06:30
  * @LastEditors: yfye
 -->
 <template>
@@ -37,7 +37,7 @@
         ></v-distpicker>
       </FormItem>
 
-      <FormItem label="申请时间" prop="applicationTime">
+     <!--  <FormItem label="申请时间" prop="applicationTime">
         <DatePicker
           type="datetime"
           v-model="formValidate.applicationTime"
@@ -51,7 +51,7 @@
           v-model="formValidate.expireTime"
           placeholder="选择日期时间"
         ></DatePicker>
-      </FormItem>
+      </FormItem> -->
       <FormItem label="账号状态:" prop="status">
         <RadioGroup v-model="formValidate.status">
           <Radio label="1">试用中</Radio>
@@ -90,8 +90,8 @@ export default {
         enterpriseName: "",
         applicant: "",
         phone: "",
-        applicationTime:null,
-        expireTime:null,
+     /*    applicationTime:null,
+        expireTime:null, */
         status: "1",
         address: "",
         province: "",
@@ -109,13 +109,13 @@ export default {
         phone: [
           { required: true, message: "手机号码不能为空", trigger: "blur" }
         ],
-        applicationTime: [
+      /*   applicationTime: [
           { required: true, message: "申请日期不能为空", trigger: "blur", pattern: /.+/ }
-        ],
+        ], */
         address: [{ required: true, message: "地址不能为空", trigger: "blur" }],
-         expireTime: [
+       /*   expireTime: [
           { required: true, message: "过期日期不能为空", trigger: "blur", pattern: /.+/ }
-        ],
+        ], */
         status: [
           { required: true, message: "账号状态不能为空", trigger: "blur" }
         ]
@@ -139,8 +139,8 @@ export default {
         this.formValidate.enterpriseName = "";
         this.formValidate.applicant = "";
         this.formValidate.phone = "";
-        this.formValidate.applicationTime =null;
-        this.formValidate.expireTime = null;
+     /*    this.formValidate.applicationTime =null;
+        this.formValidate.expireTime = null; */
         this.formValidate.status = "1";
         this.formValidate.address = "";
         this.formValidate.province = "";
@@ -155,8 +155,8 @@ export default {
         this.formValidate.enterpriseName = res.data.enterpriseName;
         this.formValidate.applicant = res.data.applicant;
         this.formValidate.phone = res.data.phone;
-        this.formValidate.applicationTime = moment(res.data.applicationTime);
-        this.formValidate.expireTime = moment(res.data.expireTime);
+      /*   this.formValidate.applicationTime = moment(res.data.applicationTime);
+        this.formValidate.expireTime = moment(res.data.expireTime); */
         this.formValidate.status = String(res.data.status);
         this.formValidate.address = res.data.address;
         this.formValidate.province = res.data.province;
