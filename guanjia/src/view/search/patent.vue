@@ -14,51 +14,27 @@
       :label-width="80"
       style="width:700px;margin:0 auto;margin-top:50px;"
     >
-      <FormItem label="企业名称" prop="enterpriseName">
-        <Input v-model="formValidate.enterpriseName" />
+      <FormItem label="员工姓名" prop="staffName">
+        <Input v-model="formValidate.staffName" />
       </FormItem>
-      <FormItem label="申请人" prop="applicant">
-        <Input v-model="formValidate.applicant" />
+
+      <FormItem label="密码" prop="password">
+        <Input v-model="formValidate.password" type="password"/>
       </FormItem>
 
       <FormItem label="手机号" prop="phone">
         <Input v-model="formValidate.phone" />
       </FormItem>
-
-      <FormItem label="地址" prop="address">
-        <Input v-model="formValidate.address" />
-      </FormItem>
-      <FormItem label="详细地址" prop="compQycode">
-        <v-distpicker
-          :province="formValidate.province"
-          :city="formValidate.city"
-          :area="formValidate.area"
-          @selected="selected"
-        ></v-distpicker>
-      </FormItem>
-
-     <!--  <FormItem label="申请时间" prop="applicationTime">
-        <DatePicker
-          type="datetime"
-          v-model="formValidate.applicationTime"
-          placeholder="选择日期时间"
-        ></DatePicker>
-      </FormItem>
-
-      <FormItem label="到期时间" prop="expireTime">
-        <DatePicker
-          type="datetime"
-          v-model="formValidate.expireTime"
-          placeholder="选择日期时间"
-        ></DatePicker>
-      </FormItem> -->
-      <FormItem label="账号状态:" prop="status">
-        <RadioGroup v-model="formValidate.status">
-          <Radio label="1">试用中</Radio>
-          <Radio label="2">正式</Radio>
-          <Radio label="0">停用</Radio>
+      <FormItem label="性别:" prop="sex">
+        <RadioGroup v-model="formValidate.sex">
+          <Radio label="男">男</Radio>
+          <Radio label="女">女</Radio>
         </RadioGroup>
       </FormItem>
+       <FormItem label="身份证号" prop="idNumber">
+        <Input v-model="formValidate.idNumber" />
+      </FormItem>
+
       <FormItem>
         <Button type="primary" @click="handleSubmit('formValidate')"
           >保存</Button
@@ -79,45 +55,31 @@ import {
   deleteService,
   postService
 } from "../../util/request";
-import VDistpicker from "v-distpicker";
 import moment from "moment";
 export default {
   name: "patent_list",
-  components: { VDistpicker },
   data() {
     return {
       formValidate: {
-        enterpriseName: "",
-        applicant: "",
-        phone: "",
-     /*    applicationTime:null,
-        expireTime:null, */
-        status: "1",
-        address: "",
-        province: "",
-        city: "",
-        area: "",
-        enterpriseId: ""
+       staffName:'',
+       password:'',
+       phone:'',
+       sex:'男',
+       idNumber:'',
+       id:''
       },
+      newData:{},
       ruleValidate: {
-        enterpriseName: [
-          { required: true, message: "企业名称不能为空", trigger: "blur" }
+        staffName: [
+          { required: true, message: "员工姓名不能为空", trigger: "blur" }
         ],
-        applicant: [
-          { required: true, message: "申请人不能为空", trigger: "blur" }
+        password: [
+          { required: true, message: "密码不能为空", trigger: "blur" }
         ],
         phone: [
-          { required: true, message: "手机号码不能为空", trigger: "blur" }
-        ],
-      /*   applicationTime: [
-          { required: true, message: "申请日期不能为空", trigger: "blur", pattern: /.+/ }
-        ], */
-        address: [{ required: true, message: "地址不能为空", trigger: "blur" }],
-       /*   expireTime: [
-          { required: true, message: "过期日期不能为空", trigger: "blur", pattern: /.+/ }
-        ], */
-        status: [
-          { required: true, message: "账号状态不能为空", trigger: "blur" }
+          { required: true, message: "手机号码不能为空", trigger: "blur" }],
+        idNumber: [
+          { required: true, message: "身份证号不能为空", trigger: "blur" }
         ]
       }
     };
@@ -133,76 +95,57 @@ export default {
   methods: {
     goHandle() {
       if (this.$route.query.id) {
-        this.formValidate.enterpriseId = this.$route.query.id;
+        this.formValidate.id = this.$route.query.id;
         this.getData({ id: this.$route.query.id }); //修改
       } else {
-        this.formValidate.enterpriseName = "";
-        this.formValidate.applicant = "";
+        this.formValidate.staffName = "";
+        this.formValidate.password = "";
         this.formValidate.phone = "";
-     /*    this.formValidate.applicationTime =null;
-        this.formValidate.expireTime = null; */
-        this.formValidate.status = "1";
-        this.formValidate.address = "";
-        this.formValidate.province = "";
-        this.formValidate.city = "";
-        this.formValidate.area = "";
-        this.formValidate.enterpriseId = "";
+        this.formValidate.sex = "男";
+        this.formValidate.idNumber = "";
+        this.formValidate.id = "";
       }
     },
     getData(params) {
       const that = this;
-      getService(`enterprise/getById/${params.id}`, res => {
-        this.formValidate.enterpriseName = res.data.enterpriseName;
-        this.formValidate.applicant = res.data.applicant;
+      getService(`staff/${params.id}?id=${params.id}`, res => {
+        this.formValidate.staffName = res.data.staffName;
+        this.formValidate.password = res.data.password;
         this.formValidate.phone = res.data.phone;
-      /*   this.formValidate.applicationTime = moment(res.data.applicationTime);
-        this.formValidate.expireTime = moment(res.data.expireTime); */
-        this.formValidate.status = String(res.data.status);
-        this.formValidate.address = res.data.address;
-        this.formValidate.province = res.data.province;
-        this.formValidate.city = res.data.city;
-        this.formValidate.area = res.data.area;
-        this.formValidate.enterpriseId = res.data.enterpriseId;
+        this.formValidate.sex = res.data.sex;
+        this.formValidate.idNumber = res.data.idNumber;
+        this.formValidate.id = res.data.id;
+
+       this.newData=res.data;
+
       });
-    },
-    selected(data) {
-      this.formValidate.province = data.province.value;
-      this.formValidate.city = data.city.value;
-      this.formValidate.area = data.area.value;
     },
     handleSubmit(name) {
       const that = this;
       that.$refs[name].validate(valid => {
         console.log(that.formValidate);
         if (valid) {
-         if(!that.formValidate.area||!that.formValidate.city||!that.formValidate.province){
-             this.$Message.error("请完善省市区");
-             return
-         }
-          that.formValidate.status = Number(that.formValidate.status);
-          that.formValidate.applicationTime = moment(
-            that.formValidate.applicationTime
-          ).format("YYYY-MM-DD HH:mm:ss");
-          that.formValidate.expireTime = moment(
-            that.formValidate.expireTime
-          ).format("YYYY-MM-DD HH:mm:ss");
+          that.formValidate.rePassword=that.formValidate.password;
+          if(that.$route.query.id){
+             that.formValidate=Object.assign({},this.newData,that.formValidate)
+          };
           !that.$route.query.id
-            ? postService("enterprise/add", that.formValidate, res => {
+            ? postService("staff/add", that.formValidate, res => {
                 if (res.code == 200) {
                   that.$router.push({
                     name: "qikan_list"
                   });
-                  this.$Message.success(res.desc);
+                  this.$Message.success(res.message);
                 } else {
                   this.$Message.error(res.message);
                 }
               })
-            : putService("enterprise/update", that.formValidate, res => {
-                if (res.status == 200) {
+            : putService("staff/update", that.formValidate, res => {
+                if (res.code == 200) {
                   that.$router.push({
                     name: "qikan_list"
                   });
-                  this.$Message.success(res.desc);
+                  this.$Message.success(res.message);
                 } else {
                   this.$Message.error(res.desc);
                 }

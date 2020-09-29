@@ -46,33 +46,19 @@ export default {
           align: "center"
         },
         {
-          title: "ID",
-          key: "enterpriseId"
+          title: "员工姓名",
+          key: "staffName"
         },
         {
-          title: "商户号",
-          key: "shopId"
+          title: "账号",
+          key: "phone"
         },
-        {
-          title: "企业名称",
-          key: "enterpriseName"
-        },
-        {
-          title: "申请人",
-          key: "applicant"
-        },
+       
         {
           title: "手机号",
           key: "phone"
         },
-        {
-          title: "申请时间",
-          key: "applicationTime"
-        },
-        {
-          title: "到期时间",
-          key: "expireTime"
-        },
+       
         {
           title: "账号状态",
           key: "status",
@@ -81,9 +67,7 @@ export default {
             if (params.row.status == 0) {
               text = "已停用";
             } else if (params.row.status == 1) {
-              text = "试用中";
-            } else if (params.row.status == 2) {
-              text = "正式";
+              text = "已启用";
             }
             return h("div", text);
           }
@@ -94,27 +78,27 @@ export default {
           width: 320,
           key: "introduceBriefly",
           render: (h, params) => {
-            const id = params.row.enterpriseId;
+            const id = params.row.staffId;
             const status = params.row.status;
             return h("div", [
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "primary",
-                    size: "small"
-                  },
-                  style: {
-                    marginRight: "20px"
-                  },
-                  on: {
-                    click: () => {
-                      this.godelete(id);
-                    }
-                  }
-                },
-                "删除"
-              ),
+              // h(
+              //   "Button",
+              //   {
+              //     props: {
+              //       type: "primary",
+              //       size: "small"
+              //     },
+              //     style: {
+              //       marginRight: "20px"
+              //     },
+              //     on: {
+              //       click: () => {
+              //         this.godelete(id);
+              //       }
+              //     }
+              //   },
+              //   "删除"
+              // ),
               h(
                 "Button",
                 {
@@ -129,7 +113,10 @@ export default {
                   on: {
                     click: () => {
                       status == 1
-                        ? putService(`enterprise/forbidden/${id}`, {}, res => {
+                        ? putService(`staff/${id}/${0}`, {
+                          id:id,
+                          status:0
+                        }, res => {
                             if (res.code == 200) {
                               this.$Message.success(res.message);
                               this.getData({
@@ -140,7 +127,8 @@ export default {
                               this.$Message.error(res.message);
                             }
                           })
-                        : putService(`enterprise/recovery/${id}`, {}, res => {
+                        : putService(`staff/${id}/${1}`, { id:id,
+                          status:1}, res => {
                             if (res.code == 200) {
                               this.$Message.success(res.message);
                               this.getData({
@@ -154,7 +142,7 @@ export default {
                     }
                   }
                 },
-                status == 1 ? "禁用" : "试用"
+                status == 1 ? "禁用" : "启用"
               ),
               h(
                 "Button",
@@ -177,30 +165,30 @@ export default {
                 },
                 "修改"
               ),
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "primary",
-                    size: "small"
-                  },
-                  style: {
-                    marginRight: "20px"
-                  },
-                  on: {
-                    click: () => {
-                      putService(
-                        `enterprise/resetPwd`,
-                        { id: id, pwd: "" },
-                        res => {
-                           this.$Message.success("重置成功");
-                        }
-                      );
-                    }
-                  }
-                },
-                "重置密码"
-              )
+              // h(
+              //   "Button",
+              //   {
+              //     props: {
+              //       type: "primary",
+              //       size: "small"
+              //     },
+              //     style: {
+              //       marginRight: "20px"
+              //     },
+              //     on: {
+              //       click: () => {
+              //         putService(
+              //           `enterprise/resetPwd`,
+              //           { id: id, pwd: "" },
+              //           res => {
+              //              this.$Message.success("重置成功");
+              //           }
+              //         );
+              //       }
+              //     }
+              //   },
+              //   "重置密码"
+              // )
             ]);
           }
         }
@@ -245,7 +233,7 @@ export default {
       this.getData(obj);
     },
     getData(obj) {
-      getService(`enterprise/pageList/${obj.pageNo}/${obj.pageSize}`, res => {
+      getService(`staff/pageList/${obj.pageNo}/${obj.pageSize}`, res => {
         this.tableData = res.data.items;
         this.total = res.data.counts;
         this.current = res.data.page;

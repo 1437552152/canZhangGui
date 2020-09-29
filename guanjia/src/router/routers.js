@@ -526,7 +526,7 @@ export default [
     name: 'search_list',
     meta: {
       icon: 'logo-codepen',
-      title: '账号管理'
+      title: '门店管理'
     },
     component: Main,
     children: [
@@ -538,7 +538,7 @@ export default [
         // },
         meta: {
           icon: 'ios-search',
-          title: '账号管理'
+          title: '员工管理'
         },
         component: () => import('@/view/search/pager.vue')
       },
@@ -547,20 +547,20 @@ export default [
         name: 'patent_list',
         meta: {
           icon: 'md-globe',
-          title: '账号详情',
+          title: '员工详情',
           hideInMenu: true
         },
         component: () => import('@/view/search/patent.vue')
       },
-     /*  {
+       {
         path: 'manage',
         name: 'manage',
         meta: {
           icon: 'md-cube',
-          title: '管理员管理'
+          title: '分类管理'
         },
         component: () => import('@/view/patent/upload.vue')
-      }, */
+      }, 
     ]
   },
  /*  {

@@ -2,10 +2,11 @@
  * @Description: 
  * @Author: yfye
  * @Date: 2020-09-26 18:47:27
- * @LastEditTime: 2020-09-28 23:50:01
+ * @LastEditTime: 2020-09-29 23:28:47
  * @LastEditors: yfye
  */
 /* const url="http://3h4w437127.wicp.vip:52202/"; */
+import qs from 'qs';
 const url="http://canzg-wsl.itheima.net:8081/"
 export function postService(path, body, callback) {
   return new Promise((resolve, reject) => {
@@ -67,7 +68,7 @@ export function getService(path, callback) {
 
 
 export function putService(path, body, callback) {
-  fetch(`${url}${path}`, {
+  fetch(`${url}${path}?${qs.stringify(body)}`, {
     method: 'PUT',
     mode: 'cors',
     headers: {

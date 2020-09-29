@@ -50,11 +50,14 @@ export default {
   org_tree_page: '组织结构树',
   drag_drawer_page: '可拖动抽屉',
   tree_select_page: '树状下拉选择器',
-  search_list: '账号管理',
-  qikan_list: '账号管理',
-  patent_list: '新增账号',
+  search_list: '门店管理',
+  qikan_list: '员工管理',
+  patent_list: '员工详情',
   patent: '资产管理',
-  manage: '管理员管理',
+  manage: '分类管理',
+
+
+  
   official: '专利官文',
   patent_fee: '专利年费',
   fee_search: '年费查询',
